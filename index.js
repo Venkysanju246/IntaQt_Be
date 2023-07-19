@@ -40,6 +40,7 @@ const upload = multer({
 })
 
 //for audio files gridfs
+//audio files
 
 app.post("/api/upload", gridStorage().single("file"), async (req, res) => {
    try {
