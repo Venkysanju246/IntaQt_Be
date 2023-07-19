@@ -97,6 +97,7 @@ app.post("/api/upload", gridStorage().single("file"), async (req, res) => {
 
 app.post("/upload", upload.single('file'), async (req, res) => {
    try {
+      res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
       const imgs = req.file.filename
       const { email } = req.body
      
