@@ -16,13 +16,7 @@ const PostJobModel = require("./model/postjob.model")
 const RecDashboardRoute = require("./controllers/RecDashboard.controller")
 const jobFormRoute = require("./controllers/jobForm.controller")
 const JobFormModel = require("./model/jobform.model")
-// app.use(cors())
-app.use(
-   cors({
-     origin: 'https://powerful-tick-costume.cyclic.app/',
-   })
- );
- 
+app.use(cors())
 app.use(express.json())
 app.use(express.static("public"))
 
