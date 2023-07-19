@@ -11,7 +11,7 @@ RecDashboardRoute.get("/activeJobs",auth, async (req, res)=>{
         const id = req.body.RuserID 
         const activeJobs = await PostJobModel.find({RuserID:id});
         res.status(200).send({
-            msg: activeJobs.length
+            msg: activeJobs
         })
     } catch (error) {
         res.status(400).send({
