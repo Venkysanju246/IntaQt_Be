@@ -24,8 +24,8 @@ RecDashboardRoute.get("/activeJobs",auth, async (req, res)=>{
 
 RecDashboardRoute.get("/jobsWithNoResponse", auth, async (req, res) => {
   try {
-    const id = req.body.userID;
-    const noResponse = await PostJobModel.find({ userID: id, jobResponse: false });
+    const id = req.body.RuserID;
+    const noResponse = await PostJobModel.find({ RuserID: id, jobResponse: false });
     res.status(200).send({
       msg: noResponse
     });
