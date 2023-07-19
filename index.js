@@ -16,9 +16,16 @@ const PostJobModel = require("./model/postjob.model")
 const RecDashboardRoute = require("./controllers/RecDashboard.controller")
 const jobFormRoute = require("./controllers/jobForm.controller")
 const JobFormModel = require("./model/jobform.model")
+// app.use(cors())
+app.use(
+   cors({
+     origin: 'https://powerful-tick-costume.cyclic.app/',
+   })
+ );
+ 
 app.use(express.json())
 app.use(express.static("public"))
-app.use(cors())
+
 app.use(express.json())
 app.use("/user", userRoute)
 app.use("/jobs", postJobRoute)
@@ -100,7 +107,7 @@ app.post("/upload", upload.single('file'), async (req, res) => {
       const { email } = req.body
      
       const userCheck = await UserModel.find({ email })
-    
+    console.log("you",email)
       const newData = new JobSeekerModel({ firstName: req.body.firstName, lastName: req.body.lastName, email: req.body.email, phoneNumber: req.body.phoneNumber, image: req.file.filename, jobUniqueID: req.body.jobUniqueID })
       await newData.save()
       if (userCheck.length > 0) {
