@@ -15,6 +15,7 @@ const {createTransport} =  require("nodemailer")
 const PostJobModel = require("./model/postjob.model")
 const RecDashboardRoute = require("./controllers/RecDashboard.controller")
 const jobFormRoute = require("./controllers/jobForm.controller")
+const JobFormModel = require("./model/jobform.model")
 app.use(express.json())
 app.use(express.static("public"))
 app.use(cors())
@@ -40,14 +41,13 @@ const upload = multer({
 })
 
 //for audio files gridfs
-//audio files
 
 app.post("/api/upload", gridStorage().single("file"), async (req, res) => {
    try {
       const answers = req.body.answers;
       const id = req.body.jobUniqueID;
       console.log("idd", id)
-      const findJob = await JobSeekerModel.findOne({ jobUniqueID: id })
+      const findJob = await JobFormModel.findOne({ jobUniqueID: id })
       const postJobFind = await PostJobModel.findOne({uniqueID: findJob.jobUniqueID})
        postJobFind.jobResponse = true;
       //  console.log("postJobFind", postJobFind)
@@ -98,9 +98,9 @@ app.post("/upload", upload.single('file'), async (req, res) => {
    try {
       const imgs = req.file.filename
       const { email } = req.body
-      console.log("now", req.body)
+     
       const userCheck = await UserModel.find({ email })
-      console.log("userCheck", userCheck)
+    
       const newData = new JobSeekerModel({ firstName: req.body.firstName, lastName: req.body.lastName, email: req.body.email, phoneNumber: req.body.phoneNumber, image: req.file.filename, jobUniqueID: req.body.jobUniqueID })
       await newData.save()
       if (userCheck.length > 0) {
