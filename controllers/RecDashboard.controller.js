@@ -10,7 +10,6 @@ RecDashboardRoute.get("/activeJobs",auth, async (req, res)=>{
     try {
         const id = req.body.RuserID 
         const activeJobs = await PostJobModel.find({RuserID:id});
-        console.log("Active jobs", activeJobs.length)
         res.status(200).send({
             msg: activeJobs.length
         })
@@ -27,7 +26,6 @@ RecDashboardRoute.get("/jobsWithNoResponse", auth, async (req, res) => {
   try {
     const id = req.body.userID;
     const noResponse = await PostJobModel.find({ userID: id, jobResponse: false });
-    console.log("jobs with no response", noResponse.length);
     res.status(200).send({
       msg: noResponse
     });
@@ -41,7 +39,6 @@ RecDashboardRoute.get("/jobsWithNoResponse", auth, async (req, res) => {
 //Unread Responses 
 RecDashboardRoute.get("/unreadResponses", auth, async (req, res) => {
   try {
-    console.log(req.body.userID)
     const data = await JobFormModel.find({ RuserID: req.body.RuserID, isViewed: false})
     res.status(200).send({
       msg: data.length
@@ -72,9 +69,7 @@ RecDashboardRoute.get("/applicants/:id" , auth,async (req, res)=>{
 RecDashboardRoute.get("/applicants",auth, async(req, res)=>{
   try {
     const id = req.body.RuserID 
-    console.log("idd", id)
      const data = await JobFormModel.find({RuserID: id})
-     console.log("unread responses", data.length)
      res.status(200).send({
       msg: data
      })
@@ -91,9 +86,7 @@ RecDashboardRoute.get("/applicants",auth, async(req, res)=>{
 RecDashboardRoute.get("/totalapplicants",auth, async(req, res)=>{
   try {
     const id = req.body.userID 
-    console.log("idd", id)
      const data = await JobFormModel.find({userID: id})
-     console.log("unread responses", data.length)
      res.status(200).send({
       msg: data
      })

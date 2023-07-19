@@ -5,7 +5,6 @@ const postJobRoute = express.Router()
 const uuid = require("uuid");
 const JobFormModel = require('../model/jobform.model');
 
-
 postJobRoute.post("/postjob",auth, async (req, res) => {
   try {
     const uniqueID = uuid.v4();
@@ -27,7 +26,6 @@ postJobRoute.post("/postjob",auth, async (req, res) => {
 
 postJobRoute.get("/alljobs", auth, async (req, res) => {
   try {
-    console.log(req.body.userID)
   const data = await PostJobModel.find({ userID: req.body.userID });
   res.status(200).send({
     msg: data
@@ -39,8 +37,6 @@ postJobRoute.get("/alljobs", auth, async (req, res) => {
   }
   
 })
-
-
 postJobRoute.get("/onejob/:id", async (req, res) => {
   const {id} = req.params
   const data = await PostJobModel.findOne({ uniqueID: id });
