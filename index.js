@@ -16,8 +16,11 @@ const PostJobModel = require("./model/postjob.model")
 const RecDashboardRoute = require("./controllers/RecDashboard.controller")
 const jobFormRoute = require("./controllers/jobForm.controller")
 const JobFormModel = require("./model/jobform.model")
-app.use(cors())
-
+// app.use(cors())
+const corsOptions = {
+   origin: ["https://client-pro-venkysanju246.vercel.app", "http://localhost:3000"],
+ };
+ app.use(cors(corsOptions));
  
 app.use(express.json())
 app.use(express.static("public"))
