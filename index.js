@@ -102,10 +102,10 @@ app.post("/api/upload", gridStorage().single("file"), async (req, res) => {
 //end audio files
 
 app.post("/upload", upload.single('file'), async (req, res) => {
-   app.use(cors())
+   res.header('Access-Control-Allow-Origin', 'https://client-pro-venkysanju246.vercel.app/');
+
    try {
      
-      // res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
 console.log(req.body.email)
       const imgs = req.file.filename
       const { email } = req.body
