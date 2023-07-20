@@ -106,7 +106,7 @@ app.post("/upload", upload.single('file'), async (req, res) => {
 
    try {
      
-console.log(req.body.email)
+      
       const imgs = req.file.filename
       const { email } = req.body
      
@@ -114,11 +114,11 @@ console.log(req.body.email)
     console.log("you",email)
 
     //new changes
-    if (!req.file) {
-      return res.status(400).send({
-        msg: "No file uploaded."
-      });
-    }
+   //  if (!req.file) {
+   //    return res.status(400).send({
+   //      msg: "No file uploaded."
+   //    });
+   //  }
     //end new changes
 
       const newData = new JobSeekerModel({ firstName: req.body.firstName, lastName: req.body.lastName, email: req.body.email, phoneNumber: req.body.phoneNumber, image: req.file.filename, jobUniqueID: req.body.jobUniqueID })
@@ -133,7 +133,7 @@ console.log(req.body.email)
       })
 
    } catch (error) {
-      return res.send({
+      return res.status(500).send({
          msg: error.message,
       })
    }
