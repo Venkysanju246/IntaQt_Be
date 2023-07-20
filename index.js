@@ -4,6 +4,7 @@ const connectionToDb = require("./config/connection")
 const postJobRoute = require("./controllers/postjob.controller")
 const app = express()
 const cors = require("cors")
+app.use(cors())
 const path = require("path")
 const multer = require("multer")
 const UserModel = require("./model/user.model")
@@ -16,11 +17,11 @@ const PostJobModel = require("./model/postjob.model")
 const RecDashboardRoute = require("./controllers/RecDashboard.controller")
 const jobFormRoute = require("./controllers/jobForm.controller")
 const JobFormModel = require("./model/jobform.model")
-// app.use(cors())
-const corsOptions = {
-   origin: ["https://client-pro-venkysanju246.vercel.app", "http://localhost:3000"],
- };
- app.use(cors(corsOptions));
+
+// const corsOptions = {
+//    origin: ["https://client-pro-venkysanju246.vercel.app", "http://localhost:3000"],
+//  };
+//  app.use(cors(corsOptions));
  
 app.use(express.json())
 app.use(express.static("public"))
@@ -101,7 +102,9 @@ app.post("/api/upload", gridStorage().single("file"), async (req, res) => {
 //end audio files
 
 app.post("/upload", upload.single('file'), async (req, res) => {
+   app.use(cors())
    try {
+     
       // res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
 console.log(req.body.email)
       const imgs = req.file.filename
