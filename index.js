@@ -17,6 +17,8 @@ const RecDashboardRoute = require("./controllers/RecDashboard.controller")
 const jobFormRoute = require("./controllers/jobForm.controller")
 const JobFormModel = require("./model/jobform.model")
 app.use(cors())
+
+ 
 app.use(express.json())
 app.use(express.static("public"))
 
@@ -97,7 +99,8 @@ app.post("/api/upload", gridStorage().single("file"), async (req, res) => {
 
 app.post("/upload", upload.single('file'), async (req, res) => {
    try {
-      res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+      // res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+console.log(req.body.email)
       const imgs = req.file.filename
       const { email } = req.body
      
