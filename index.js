@@ -102,7 +102,7 @@ app.post("/api/upload", gridStorage().single("file"), async (req, res) => {
 //end audio files
 
 app.post("/upload", upload.single('file'), async (req, res) => {
-   res.header('Access-Control-Allow-Origin', 'https://client-pro-venkysanju246.vercel.app/');
+  // res.header('Access-Control-Allow-Origin', 'https://client-pro-venkysanju246.vercel.app/');
 
    try {
      
@@ -112,6 +112,15 @@ console.log(req.body.email)
      
       const userCheck = await UserModel.find({ email })
     console.log("you",email)
+
+    //new changes
+    if (!req.file) {
+      return res.status(400).send({
+        msg: "No file uploaded."
+      });
+    }
+    //end new changes
+
       const newData = new JobSeekerModel({ firstName: req.body.firstName, lastName: req.body.lastName, email: req.body.email, phoneNumber: req.body.phoneNumber, image: req.file.filename, jobUniqueID: req.body.jobUniqueID })
       await newData.save()
       if (userCheck.length > 0) {
